@@ -11,10 +11,24 @@ const PageRoutes = () =>{
                 {Routes.home.element}
             </Suspense>
         },{
-            path: Routes.Analytics.path,
+            path: Routes.analytics.path,
             element:<Suspense fallback={<LoadingPage/>}>
-                {Routes.Analytics.element}
+                {Routes.analytics.element}
             </Suspense>
+        },{
+            path: Routes.login.path,
+            element:<Suspense fallback={<LoadingPage/>}>
+                {Routes.login.element}
+            </Suspense>
+        },{
+            path: Routes.signup.path,
+            element:<Suspense fallback={<LoadingPage/>}>
+                {Routes.signup.element}
+            </Suspense>
+        }
+        ,{
+            path: Routes.loading.path,
+            element:<LoadingPage />
         }
     ]))
 }
