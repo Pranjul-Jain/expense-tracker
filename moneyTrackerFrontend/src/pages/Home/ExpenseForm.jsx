@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputAdornment, Select, TextField, MenuItem,OutlinedInput } from '@mui/material'
+import { InputAdornment, Select, TextField, MenuItem,OutlinedInput,Checkbox } from '@mui/material'
 
 const ExpenseForm = () => {
   return (
@@ -21,8 +21,18 @@ const ExpenseForm = () => {
         <OutlinedInput name="amount"  className='w-1/2' placeholder='Amount' startAdornment={<InputAdornment position='start'>₹</InputAdornment>} />
         </div>
         <div className='flex justify-center align-center gap-6 md:gap-12'>
-        <TextField name="location" className='w-1/2' label="Location" />
-        <TextField name="comment" className='w-1/2' label="Comment" />
+          <TextField name="location" className='w-1/2' label="Location" />
+          <TextField name="comment" className='w-1/2' label="Comment" />
+        </div>
+        <div className='flex align-center gap-6 md:gap-12'>
+            <div>
+                <Checkbox name="isGroup" />
+                <label htmlFor="isGroup">Income</label>
+            </div>
+            <div>
+                <Checkbox name="same" />
+                <label htmlFor="same">same as previous</label>
+            </div>
         </div>
         <button className='submit-button w-1/4 capitalize' >Submit</button>
     </form>

@@ -39,6 +39,10 @@ nav .selected a:link{
   width: 70px;
 }
 
+.scroll-hide::-webkit-scrollbar{
+  width:0;
+}
+
 .loader{
   background-color: whitesmoke;
   width:calc(100% + 20px);
@@ -46,6 +50,14 @@ nav .selected a:link{
   border:10px solid orange;
   animation: loading 1200ms ease-out infinite;
   z-index:-1;
+}
+
+.grid-analytics-col{
+  grid-template-columns: 0.5fr 0.7fr 1fr 1fr !important;
+}
+
+.grid-analytics-subcol{
+  grid-template-columns: 0.5fr 0.6fr 0.8fr 1fr !important;
 }
 
 @keyframes loading {
