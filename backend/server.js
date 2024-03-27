@@ -4,6 +4,7 @@ const ConnectDB=require("./config/db")
 dotenv.config()
 
 const PORT = process.env.PORT || 8000
+
 ConnectDB()
 .then(()=>{
     app.listen(PORT, () => {

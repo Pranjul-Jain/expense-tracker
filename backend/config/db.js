@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
-const DB_NAME=require("../constants")
-
-
+const { DB_NAME }=require("../constants")
 
 
 const ConnectDB= async()=>{

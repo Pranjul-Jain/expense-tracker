@@ -1,42 +1,44 @@
 const jwt = require("jsonwebtoken")
+const { User } = require("../../models/appModels/user.models")
 
-module.exports.verifyToken = (req,res,next)=>{
+module.exports.verifyToken = async (req,res,next)=>{
 
-    if(!req.headers.Authorization){
-        return res.json({
+    if(!req.headers.Authorization || !req.headers['user-agent']){
+        return res.status(401).json({
             success:false,
-            message:"No token provided"
-        }).status(401)
+            message:"invalid request"
+        })
     }
     
     const [tokenType,token] = req.headers.Authorization.split(" ")
 
-    if(tokenType !== "Bearer" || !token){
-        return res.json({
+    if(tokenType.toUpperCase() !== "BEARER" || !token){
+        return res.status(401).json({
             success:false,
             message:"Invalid token"
-        }).status(401)
+        })
     }
 
-    const tokenData = jwt.verify(token,process.env.JWT_SECRET,(err,decoded)=>{
-        if(err){
-            return res.json({
+    try{
+
+        let tokenData = jwt.verify(token,process.env.JWT_SECRET)
+
+        const user = user.findOne({$or:[{email:tokenData.userId},{username:tokenData.userId}]})
+        // if user exists then token is valid
+        if(!user){
+            return res.status(401).json({
                 success:false,
+                error:false,
                 message:"Invalid token"
-            }).status(401)
+            })
         }
 
-        return decoded
-    })
+        req.userId = tokenData.userId
+        req.userAgent = tokenData.userAgent
 
-    if(tokenData["user-agent"]!=req.headers['user-agent']){
-        return res.json({
-            success:false,
-            message:"Invalid token"
-        }).status(401)
+    }catch(err){
+        // if token is expired or refresh token is not there that means user is logged    
     }
-
-    req.userId = tokenData.userId
-
+    
     next()
 }

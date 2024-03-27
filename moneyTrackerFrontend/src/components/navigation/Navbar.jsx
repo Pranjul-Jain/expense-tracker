@@ -7,6 +7,7 @@ import useResponsive from "../../hooks/UseResponsive"
 const Navbar = ({
     home,
     analytics,
+    addfriend,
     isAuth
 }) => {
 
@@ -19,6 +20,7 @@ const Navbar = ({
             {isAuth && <>
               <li className={'cursor-pointer '+(home?"selected":"")}><Link to={Routes.home.path} className='text-base sm:text-lg'>Home</Link></li>
               <li className={'cursor-pointer '+(analytics?"selected":"")}><Link to={Routes.analytics.path} className='text-base sm:text-lg'>Analytics</Link></li>
+              <li className={'cursor-pointer '+(addfriend?"selected":"")}><Link to={Routes.addfriend.path} className='text-base sm:text-lg'>Add Friend</Link></li>
               </>
             }
         </ul>
