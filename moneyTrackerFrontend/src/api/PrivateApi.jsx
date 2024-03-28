@@ -37,6 +37,7 @@ async (err)=>{
                 if(token){
                     return PrivateApi(originalConfig)
                 }
+                return Promise.reject(err)
             }catch(err){
                 return Promise.reject(err)
             }

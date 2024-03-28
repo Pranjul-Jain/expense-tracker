@@ -1,3 +1,3 @@
-module.exports.DB_NAME="EXPENSE_TRACKER"
+const DB_NAME="expense_tracker"
 
-// module.exports =DB_NAME
+export default DB_NAME

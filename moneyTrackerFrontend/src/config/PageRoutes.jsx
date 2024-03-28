@@ -16,6 +16,11 @@ const PageRoutes = () =>{
                 {Routes.analytics.element}
             </Suspense>
         },{
+            path: Routes.addfriend.path,
+            element:<Suspense fallback={<LoadingPage />}>
+                {Routes.addfriend.element}
+            </Suspense>
+        },{
             path: Routes.login.path,
             element:<Suspense fallback={<LoadingPage/>}>
                 {Routes.login.element}

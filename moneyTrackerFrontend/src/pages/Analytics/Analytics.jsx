@@ -26,66 +26,6 @@ const GroupPersonExpense = [
       {"yuvraj":50,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
     ],
   },
-  {
-    "id" : "1234",
-    "Date" : "11/03/2024",
-    "Expense" : 500,
-    "GroupExpenses":[
-      {"pranjul":250,comment:"chole kulche",location:"chitkara"},
-      {"abhi":125,comment:"bhature",location:"chitkara"},
-      {"yuvraj":125,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  },
-  {
-    "id" : "1233",
-    "Date" : "11/04/2024",
-    "Expense" : 200,
-    "GroupExpenses":[
-      {"pranjul":100,comment:"chole kulche",location:"chitkara"},
-      {"abhi":50,comment:"bhature",location:"chitkara"},
-      {"yuvraj":50,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  },
-  {
-    "id" : "1234",
-    "Date" : "11/03/2024",
-    "Expense" : 500,
-    "GroupExpenses":[
-      {"pranjul":250,comment:"chole kulche",location:"chitkara"},
-      {"abhi":125,comment:"bhature",location:"chitkara"},
-      {"yuvraj":125,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  },
-  {
-    "id" : "1233",
-    "Date" : "11/04/2024",
-    "Expense" : 200,
-    "GroupExpenses":[
-      {"pranjul":100,comment:"chole kulche",location:"chitkara"},
-      {"abhi":50,comment:"bhature",location:"chitkara"},
-      {"yuvraj":50,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  },
-  {
-    "id" : "1234",
-    "Date" : "11/03/2024",
-    "Expense" : 500,
-    "GroupExpenses":[
-      {"pranjul":250,comment:"chole kulche",location:"chitkara"},
-      {"abhi":125,comment:"bhature",location:"chitkara"},
-      {"yuvraj":125,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  },
-  {
-    "id" : "1233",
-    "Date" : "11/04/2024",
-    "Expense" : 200,
-    "GroupExpenses":[
-      {"pranjul":100,comment:"chole kulche",location:"chitkara"},
-      {"abhi":50,comment:"bhature",location:"chitkara"},
-      {"yuvraj":50,comment:"Eaten momos at art of momos after chikara colony",location:"Art of Momos"},
-    ],
-  }
 ]
 
 const SinglePersonExpense = [

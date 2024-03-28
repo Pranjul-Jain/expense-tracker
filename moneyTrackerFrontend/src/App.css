@@ -60,6 +60,13 @@ nav .selected a:link{
   grid-template-columns: 0.5fr 0.6fr 0.8fr 1fr !important;
 }
 
+/*  Error */
+.errorField{
+  color:crimson;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 @keyframes loading {
   0%{
     width:calc(100% + 20px);

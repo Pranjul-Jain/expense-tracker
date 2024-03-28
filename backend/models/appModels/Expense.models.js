@@ -1,6 +1,6 @@
-const mongoose=require("mongoose");
+import mongoose from "mongoose"
 
-const ExpemseSchema=mongoose.Schema({
+const ExpenseSchema=mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
@@ -25,4 +25,4 @@ const ExpemseSchema=mongoose.Schema({
 },{timestamps:true})
 
 
-const Expense=mongoose.model("Expense",ExpemseSchema)
+export default Expense=mongoose.model("Expense",ExpenseSchema)

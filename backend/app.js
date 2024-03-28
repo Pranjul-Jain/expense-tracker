@@ -1,17 +1,17 @@
-const express = require("express")
-const cors = require("cors")
-const path = require("path")
-const app = express()
-const cookieParser =require("cookie-parser")
+import express from "express"
+import cors from "cors"
 
-const routes = require("./routes/appRoutes/routes")
+const app = express()
+
+import routes from "./routes/appRoutes/routes.js"
 
 // Adding Basic Configurations
 app.use(cors({
-    origin:process.env.CORS_URL,
+    origin:"*",
     credentials:true,
 
 }))
+
 app.use(express.json({
     limit:"16kb"
 }))
@@ -21,14 +21,11 @@ app.use(express.urlencoded({
  }))
 
 // Adding Static Files
-app.use(express.static(path.join(__dirname,"../moneyTrackerFrontend/dist")))
-
-// cookies
-app.use(cookieParser())
+app.use(express.static("../moneyTrackerFrontend/dist"))
 
 
 // Importing Routes
 app.use("",routes)
 
 
-module.exports = app
+export default app

@@ -1,15 +1,16 @@
-import t, { toast,useToasterStore } from "react-hot-toast"
+import t, { toast, useToasterStore } from 'react-hot-toast';
 
-export const useToast = ()=>{
-    const { toasts } = useToasterStore()
+export const useToast = () => {
+    const { toasts } = useToasterStore();
 
-    function clearAllToast(){
-        toasts.filter((tt)=>tt.visible)
-        .filter((_,i)=>i==0)
-        .forEach((tt)=>t.dismiss(tt.id))
+    function clearAllToast() {
+        toasts
+            .filter((tt) => tt.visible)
+            .filter((_, i) => i === 0)
+            .forEach((tt) => t.dismiss(tt.id));
     }
 
-    function showToast(message,type){
+    function showToast(message, type) {
         clearAllToast();
 
         if (type === 'success') {
@@ -27,8 +28,7 @@ export const useToast = ()=>{
         } else {
             toast.default(message);
         }
-
     }
 
     return { showToast };
-}
+};
