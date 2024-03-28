@@ -1,13 +1,13 @@
-const express = require("express")
-const cors = require("cors")
-const path = require("path")
+import express from "express"
+import cors from "cors"
+
 const app = express()
 
-const routes = require("./routes/appRoutes/routes")
+import routes from "./routes/appRoutes/routes.js"
 
 // Adding Basic Configurations
 app.use(cors({
-    origin:process.env.CORS_URL,
+    origin:"*",
     credentials:true,
 
 }))
@@ -21,11 +21,11 @@ app.use(express.urlencoded({
  }))
 
 // Adding Static Files
-app.use(express.static(path.join(__dirname,"../moneyTrackerFrontend/dist")))
+app.use(express.static("../moneyTrackerFrontend/dist"))
 
 
 // Importing Routes
 app.use("",routes)
 
 
-module.exports = app
+export default app

@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken")
-const { User } = require("../../models/appModels/user.models")
+import jwt from "jsonwebtoken"
+import User from "../../models/appModels/user.models.js"
 
-module.exports.verifyToken = async (req,res,next)=>{
+export const verifyToken = async (req,res,next)=>{
 
     if(!req.headers.Authorization || !req.headers['user-agent']){
         return res.status(401).json({

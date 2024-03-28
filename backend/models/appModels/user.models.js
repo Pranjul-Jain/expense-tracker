@@ -1,6 +1,7 @@
-const mongoose=require("mongoose");
+import mongoose from "mongoose"
+import bcrypt from "bcrypt"
+
 const MONGODB_SALT_ROUNDS = 10
-const bcrypt=require("bcrypt")
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -49,16 +50,10 @@ userSchema.pre("save",async function(next){
 
 })
 
-userSchema.methods.comparePassword = async function(candidatePassword){
-
-    try{
-        return await bcrypt.compare(candidatePassword,this.password)
-    }catch(err){
-        throw err;
-    }
-    
+userSchema.methods.comparePassword = function (candidatePassword){ 
+    return bcrypt.compare(candidatePassword,this.password)
 }
 
 
-
-module.exports.User = mongoose.model("User",userSchema)
+const User =  mongoose.model("User",userSchema)
+export default User;

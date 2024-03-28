@@ -1,11 +1,12 @@
-const jwt = require("jsonwebtoken")
-const { User } = require("../../models/appModels/user.models")
+import jwt from "jsonwebtoken"
+import User from "../../models/appModels/user.models.js"
+import Friends from "../../models/appModels/Friend.models.js"
 
-module.exports.index = async (req,res)=>{
+export const index = async (req,res)=>{
     return res.render("index.html")
 }
 
-module.exports.login = async (req,res)=>{
+export const login = async (req,res)=>{
 
     const { username,password } = req.body
     
@@ -49,6 +50,7 @@ module.exports.login = async (req,res)=>{
     }
     
     const payload = {
+        id:user._id,
         userId:user.email,
         userAgent:req.headers['user-agent']
     }
@@ -76,7 +78,7 @@ module.exports.login = async (req,res)=>{
     })
 }
 
-module.exports.register = async (req,res)=>{
+export const register = async (req,res)=>{
     const { username,email,password } = req.body
 
     if(!username || !email || !password){
