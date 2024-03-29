@@ -1,39 +1,40 @@
 import { useRoutes } from 'react-router-dom'
 import { Routes } from "./Routes"
-import { Suspense } from 'react'
-import LoadingPage from '../pages/LoadingPage/LoadingPage'
+import ProtectedRoute from '../services/security/ProtectedRoute'
+import PublicRoute from "../services/security/ProtectedRoute"
 
-const PageRoutes = () =>{
+const PageRoutes = ({
+    isAuth,
+    setAuth,
+    friends
+}) =>{
     return (useRoutes([
         {
             path: Routes.home.path,
-            element:<Suspense fallback={<LoadingPage/>}>
-                {Routes.home.element}
-            </Suspense>
+            element:<ProtectedRoute isAuth={isAuth} setAuth={setAuth}>
+                <Routes.home.element isAuth={isAuth} friends={friends} setAuth={setAuth}/>
+            </ProtectedRoute>
+               
         },{
             path: Routes.analytics.path,
-            element:<Suspense fallback={<LoadingPage/>}>
-                {Routes.analytics.element}
-            </Suspense>
+            element:<ProtectedRoute isAuth={isAuth} setAuth={setAuth}>
+                <Routes.analytics.element isAuth={isAuth} friends={friends} setAuth={setAuth}/>
+            </ProtectedRoute>
         },{
             path: Routes.addfriend.path,
-            element:<Suspense fallback={<LoadingPage />}>
-                {Routes.addfriend.element}
-            </Suspense>
+            element:<ProtectedRoute isAuth={isAuth} setAuth={setAuth}>
+                <Routes.addfriend.element isAuth={isAuth} friends={friends} setAuth={setAuth}/>
+            </ProtectedRoute>
         },{
             path: Routes.login.path,
-            element:<Suspense fallback={<LoadingPage/>}>
-                {Routes.login.element}
-            </Suspense>
+            element:<PublicRoute isAuth={isAuth}>
+                <Routes.login.element isAuth={isAuth} setAuth={setAuth}/>
+            </PublicRoute>
         },{
             path: Routes.signup.path,
-            element:<Suspense fallback={<LoadingPage/>}>
-                {Routes.signup.element}
-            </Suspense>
-        }
-        ,{
-            path: Routes.loading.path,
-            element:<LoadingPage />
+            element:<PublicRoute isAuth={isAuth}>
+                <Routes.signup.element isAuth={isAuth} setAuth={setAuth}/>
+            </PublicRoute>
         }
     ]))
 }

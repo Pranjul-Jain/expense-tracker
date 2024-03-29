@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { TextField } from '@mui/material'
 import { Routes } from '../../config/Routes'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useToast } from "../../hooks/useToast"
-import { validatePassword,setAndCheckEmptyfield,isEmptyField } from "../../utils/Validation"
+import { validatePassword,isEmptyField } from "../../utils/Validation"
 import Error from '../../components/oraganisms/Error'
 import auth from "../../config/auth/auth.json"
-import { PrivateApi } from "../../api/PrivateApi"
+import { PublicApi } from "../../api/Http"
 
-const LoginForm = () => {
+const LoginForm = ({
+  isAuth,
+  setAuth
+}) => {
+
+  const navigate = useNavigate()
 
   const [inputs,setInputs] = useState({})
   const [error,setError] = useState({
@@ -20,7 +25,11 @@ const LoginForm = () => {
       isError: false
     }
   })
-  
+
+  useEffect(()=>{
+    isAuth && navigate(Routes.home.path)
+  },[isAuth])
+
   const { showToast } = useToast();
 
   return (
@@ -92,7 +101,7 @@ const LoginForm = () => {
     }
 
     try{
-      const response = await PrivateApi.post("/user-login",{
+      const response = await PublicApi.post("/user-login",{
         username: inputs.username,
         password: inputs.password
       })
@@ -100,9 +109,14 @@ const LoginForm = () => {
       const data = await response.data;
 
       if(data.success){
-        showToast("user logged in","success")
-        // localStorage.setItem(auth.tokenname,data.accessToken)
-        // localStorage.setItem(auth.refreshTokenName,data.refreshTokenName)
+        // on successfull login set token in local storage and refreshToken in session storage and navigate user to home
+        localStorage.setItem(auth.tokenname,data.accessToken)
+        localStorage.setItem(auth.refreshTokenName,JSON.stringify({
+          value: data.refreshToken,
+          expiry : Math.floor((new Date().getTime() + 5.5*60*60*1000 + data.refreshExpiry)/1000)
+        }))
+
+        setAuth(true)
       }else{
         showToast("error while logging user","error")
       }
@@ -117,5 +131,6 @@ const LoginForm = () => {
   }
 
 }
+
 
 export default LoginForm;

@@ -3,14 +3,16 @@ import User from "../../models/appModels/user.models.js"
 
 export const verifyToken = async (req,res,next)=>{
 
-    if(!req.headers.Authorization || !req.headers['user-agent']){
+    if(!req.headers.authorization || !req.headers['user-agent']){
         return res.status(401).json({
             success:false,
             message:"invalid request"
         })
     }
     
-    const [tokenType,token] = req.headers.Authorization.split(" ")
+    const authorization = req.headers.authorization
+
+    const [tokenType,token] = authorization.split(" ")
 
     if(tokenType.toUpperCase() !== "BEARER" || !token){
         return res.status(401).json({
@@ -22,8 +24,7 @@ export const verifyToken = async (req,res,next)=>{
     try{
 
         let tokenData = jwt.verify(token,process.env.JWT_SECRET)
-
-        const user = user.findOne({$or:[{email:tokenData.userId},{username:tokenData.userId}]})
+        const user = await User.findOne({email:tokenData.userId})
         // if user exists then token is valid
         if(!user){
             return res.status(401).json({
@@ -37,7 +38,7 @@ export const verifyToken = async (req,res,next)=>{
         req.userAgent = tokenData.userAgent
 
     }catch(err){
-        // if token is expired or refresh token is not there that means user is logged    
+        // if token is expired or refresh token is not there that means user is logged out
     }
     
     next()

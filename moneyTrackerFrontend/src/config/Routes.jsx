@@ -10,26 +10,26 @@ const Signup = lazy(()=>import("../pages/Signup/Signup"))
 export const Routes = {
     home : {
         path:'/',
-        element:<Home/>
+        element:Home
     },
     analytics : {
         path:"/analytics",
-        element:<Analytics />
+        element:Analytics
     },
     loading : {
         path:"/loading",
-        element : <LoadingPage />
+        element :LoadingPage
     },
     login : {
         path:"/login",
-        element : <Login />
+        element : Login
     },
     addfriend : {
         path:"/addfriend",
-        element: <AddFriend />  
+        element: AddFriend  
     },
     signup : {
         path:"/signup",
-        element : <Signup/>
+        element : Signup
     }
 }

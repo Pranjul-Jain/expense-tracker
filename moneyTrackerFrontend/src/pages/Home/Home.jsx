@@ -1,8 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/navigation/Navbar'
-import { MenuItem,Select,TextField,InputAdornment,OutlinedInput} from '@mui/material'
 import HistPlot from '../../components/graphs/HistPlot'
-// import UseResponsive from '../../hooks/UseResponsive'
 import ExpenseForm from './ExpenseForm'
 
 const Home = () => {

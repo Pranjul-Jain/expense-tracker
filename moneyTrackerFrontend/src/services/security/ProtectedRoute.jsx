@@ -1,15 +1,18 @@
-import React, { Children, Suspense } from 'react'
+import React, { Children, Suspense, useEffect,cloneElement } from 'react'
 import { Routes } from "../../config/Routes"
-import {  Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import LoadingPage from '../../pages/LoadingPage/LoadingPage'
 
 
 const ProtectedRoute = ({
-    isAuth,children
+    isAuth,setAuth,children
 }) => {
 
+    const navigate = useNavigate()
 
-    if(!isAuth)return <Navigate to={Routes.login.path} />
+    useEffect(()=>{
+        if(!isAuth)return navigate(Routes.login.path)
+    },[isAuth])
 
     return (
        <Suspense fallback={<LoadingPage/>}>

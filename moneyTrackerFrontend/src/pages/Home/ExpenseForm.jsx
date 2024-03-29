@@ -13,7 +13,6 @@ const ExpenseForm = () => {
             value="pranjul"
             name="person"
         >
-            <MenuItem value="">Person</MenuItem>
             <MenuItem value="pranjul">Pranjul</MenuItem>
             <MenuItem value="abhi">Abhi</MenuItem>
             <MenuItem value="yuvraj">Yuvraj</MenuItem>
@@ -27,7 +26,7 @@ const ExpenseForm = () => {
         <div className='flex align-center gap-6 md:gap-12'>
             <div>
                 <Checkbox name="isGroup" />
-                <label htmlFor="isGroup">Income</label>
+                <label htmlFor="isGroup">Group</label>
             </div>
             <div>
                 <Checkbox name="same" />
