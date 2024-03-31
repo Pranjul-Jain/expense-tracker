@@ -12,7 +12,12 @@ import { validateEmail,validatePassword,updateFieldError, isEmptyField } from '.
 const Signup = () => {
 
   const [inputs,setInputs] = useState({})
-  const [error,setError] = useState({})
+  const [error,setError] = useState({
+    username:{isError:false},
+    email:{isError:false},
+    password:{isError:false},
+    confirmPassword:{isError:false}
+  })
 
   const { showToast } = useToast()
 
@@ -115,6 +120,15 @@ const Signup = () => {
                 showToast("some issue occured","error")
             }
         }
+
+        setInputs({})
+        setError({
+            username:{isError:false,message:""},
+            email:{isError:false,message:""},
+            password:{isError:false,message:""},
+            confirmPassword:{isError:false,message:""}
+        })
+
     }
 
     function updateAndValidatePassword(event){

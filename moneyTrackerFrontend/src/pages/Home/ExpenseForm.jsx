@@ -33,7 +33,7 @@ const ExpenseForm = ({
 
   const handleGroup = (event)=> setIsGroup(event.target.checked)
   const handleDateChange = (valueObj)=> setInputs(prev=>{return {...prev,expenseDate: new Date(valueObj.$d)}})
-  const updateData = (event)=> setInputs(prev=>{return {...prev,[event.target.name]:event.target.value.trim()}})
+  const updateData = (event)=> setInputs(prev=>{return {...prev,[event.target.name]:event.target.value}})
   const handleNumber = (event)=> 
     !isEmptyField(event.target.value) && event.target.value.trim().search(/[^0-9]/)!==-1 
     ?setInputs(prev=>{return {...prev,[event.target.name]:event.target.value.slice(0,-1)}})
@@ -168,6 +168,8 @@ const ExpenseForm = ({
     
                 return data;
             })
+            setGroupData(newGroupData)
+            setGroupMembersStatus(newGroupMembersStatus)
         };
 
         // now getting the next person index whose data is still not set
@@ -184,8 +186,6 @@ const ExpenseForm = ({
             // if skipped checkbox is checked then setting the current group member data and submit the form
             if(!skipped){
                 setInputs(prev=>{return {...prev,person:"friend-"+nextIndex}})
-                setGroupData(newGroupData)
-                setGroupMembersStatus(newGroupMembersStatus)
                 return
             }else{
 

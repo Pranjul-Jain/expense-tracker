@@ -125,6 +125,16 @@ const LoginForm = ({
         showToast("User not registered","error")
       }
     }
+
+    setInputs({})
+    setError({
+      username: {
+        isError: false,
+      },
+      password: {
+        isError: false
+      }
+    })
   }
 
 }
