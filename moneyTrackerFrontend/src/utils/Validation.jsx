@@ -10,7 +10,7 @@ export const validatePassword = (password)=>{
         correct : true,
         message : ""
     };
-
+  
     password = password.trim()
 
     if(password.length < 8)return {
@@ -39,8 +39,14 @@ export const validatePassword = (password)=>{
 
 export const isEmptyField = (fieldValue)=> !fieldValue || !fieldValue.trim()
 
-export const setAndCheckEmptyfield = function (fieldName,fieldValue,setErrorFunction,prevError,errorData){
-    const error = !fieldValue || !fieldValue.trim()
+export function updateFieldError(name,value,error,setError){
+    // error contains the previous error state
+    if(isEmptyField(value?String(value):"")){
+        (!error[name] || !error[name].isError) && setError(prev=>{return {...prev,[name]:{isError:true}}})
+        return true
+    }else{
+        (!error[name] || error[name].isError) &&  setError(prev=>{return {...prev,[name]:{isError:false}}})
+    }
 
-    return error
+    return false
 }

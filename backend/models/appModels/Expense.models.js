@@ -1,16 +1,18 @@
 import mongoose from "mongoose"
 
-const ExpenseSchema=mongoose.Schema({
+const SingleExpenseSchema= new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true
     },
+    date: {
+        type: Date,
+        required:true
+    },
     amount:{
         type:Number,
         default:0,
-
-
     },
     location:{
         type:String,
@@ -20,9 +22,45 @@ const ExpenseSchema=mongoose.Schema({
     },
     comment:{
         type:String,
-        required:true
+        required:true,
+        lowercase: true
     }
-},{timestamps:true})
+})
+
+const GroupExpenseSchema = new mongoose.Schema({
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true
+    },
+    date: {
+        type:Date,
+        required:true
+    },
+    groupExpenses:[
+        {
+            person:{
+                type:String,
+                required:true
+            },
+            amount:{
+                type:Number,
+                default: 0,
+            },
+            comment:{
+                type:String,
+                required:true,
+                lowercase: true
+            },
+            location:{
+                type:String,
+                required:true,
+                lowercase: true
+            }
+        }
+    ]
+})
 
 
-export default Expense=mongoose.model("Expense",ExpenseSchema)
+export const SingleExpense= mongoose.model("SingleExpense",SingleExpenseSchema)
+export const GroupExpense = mongoose.model("GroupExpense",GroupExpenseSchema)

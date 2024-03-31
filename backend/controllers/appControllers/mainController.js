@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken"
 import User from "../../models/appModels/user.models.js"
 
-const mumbaiGMT = 5.5*60*60*1000
 
 export const index = async (req,res)=>{
     return res.render("index.html")
@@ -56,17 +55,12 @@ export const login = async (req,res)=>{
         userAgent:req.headers['user-agent']
     }
 
-    const currentTime = Math.floor((new Date().getTime() + mumbaiGMT)/1000)
 
-    refreshToken = jwt.sign(payload,process.env.JWT_SECRET,
-    {
-        expiresIn : currentTime + 2*60*60 // 2h
-    })
+    payload.exp = new Date().getTime() + 2*60*60*1000
+    refreshToken = jwt.sign(payload,process.env.JWT_SECRET)
 
-    const accessToken = jwt.sign(payload,process.env.JWT_SECRET,
-    {
-        expiresIn : currentTime + 15*60 // 15m
-    })
+    payload.exp = new Date().getTime() + 15*60*1000
+    const accessToken = jwt.sign(payload,process.env.JWT_SECRET)
 
     user.refreshToken = refreshToken
 
@@ -151,18 +145,15 @@ export const refreshToken = async (req,res)=>{
             userId:user.email,
             userAgent:req.headers['user-agent']
         }
-        
-        const currentTime = Math.floor((new Date().getTime() + mumbaiGMT)/1000)
     
-        const newrefreshToken = jwt.sign(payload,process.env.JWT_SECRET,
-        {
-            expiresIn : currentTime + 2*60*60 // 2h
-        })
 
-        const accessToken = jwt.sign(payload,process.env.JWT_SECRET,
-        {
-            expiresIn : currentTime + 15*60 // 15m
-        })
+        payload.exp = new Date().getTime() + 2*60*60*1000 // 2hr
+        const newrefreshToken = jwt.sign(payload,process.env.JWT_SECRET)
+    
+
+        payload.exp = new Date().getTime() + 15*60*1000// 15m
+        const accessToken = jwt.sign(payload,process.env.JWT_SECRET)
+    
 
         user.refreshToken = newrefreshToken
 

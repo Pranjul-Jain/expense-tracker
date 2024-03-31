@@ -9,6 +9,7 @@ import { useToast } from './hooks/useToast'
   
 function App() {
   const navigate = useNavigate()
+
   const { showToast } = useToast()
 
   const [isAuth,setAuth] = useState(false)
@@ -29,7 +30,7 @@ function App() {
 
   useEffect(()=>{
     isAuth && friends.length < 1 && GetFriends()
-  },isAuth)
+  },[isAuth])
 
   return (
     <PageRoutes isAuth={isAuth} friends={friends} setAuth={setAuth} />
@@ -47,12 +48,12 @@ function App() {
         localStorage.setItem(auth.tokenname,data.accessToken)
         localStorage.setItem(auth.refreshTokenName,JSON.stringify({
           value: data.refreshToken,
-          expiry: Math.floor((new Date().getTime() + 5.5*60*60*1000 + data.refreshExpiry))
+          expiry: new Date().getTime() +  data.refreshExpiry
         }))
 
         setRefreshToken({
           value: data.refreshToken,
-          expiry : Math.floor((new Date().getTime() + 5.5*60*60*1000 + data.refreshExpiry))
+          expiry : new Date().getTime() +  data.refreshExpiry
         })
 
         setAuth(true)
@@ -72,12 +73,14 @@ function App() {
 
   async function GetFriends(){
     try{
-      const response = PrivateApi.get("/getfriends")
+      const response = await PrivateApi.get("/getfriends")
       const data = await response.data
+
       if(data.success){
         setFriends(data.data)
       }
     }catch(err){
+      console.log(err)
       showToast("error while fetching friends","error")
     }
   }

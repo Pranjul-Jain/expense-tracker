@@ -85,13 +85,10 @@ const LoginForm = ({
     if(isEmptyField(inputs.password)){
       setError(prev=>{return {...prev,password:{...prev.password,isError:true}}})
       validationFlag = true;
-    }else{
-      error.username.isError && setError(prev=>{return {...prev,password:{isError:false}}})
     }
     
     if(validationFlag){
-      showToast("All fields are mandatory","error")
-      
+      showToast("All fields are mandatory","error")    
       return
     }
 
@@ -113,7 +110,7 @@ const LoginForm = ({
         localStorage.setItem(auth.tokenname,data.accessToken)
         localStorage.setItem(auth.refreshTokenName,JSON.stringify({
           value: data.refreshToken,
-          expiry : Math.floor((new Date().getTime() + 5.5*60*60*1000 + data.refreshExpiry)/1000)
+          expiry : new Date().getTime() + data.refreshExpiry
         }))
 
         setAuth(true)
